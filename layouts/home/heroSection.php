@@ -1,3 +1,5 @@
+<?php include_once "./data/heroSectionData.php" ?>
+
 <section>
     <div id="carouselExampleIndicators" class="carousel slide">
         <div class="carousel-indicators">
@@ -11,22 +13,11 @@
                 aria-label="Slide 4"></button>
         </div>
         <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="https://bizweb.dktcdn.net/100/436/596/themes/980306/assets/slider_4.jpg?1768998303308"
-                    class="d-block w-100" alt="ảnh-1">
+            <?php foreach ($imageCarousel as $index => $image): ?>
+            <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
+                <img src="<?= $image['src'] ?>" class="d-block w-100" alt="<?= $image['alt'] ?>">
             </div>
-            <div class="carousel-item">
-                <img src="https://bizweb.dktcdn.net/100/436/596/themes/980306/assets/slider_1.jpg?1768998303308"
-                    class="d-block w-100" alt="ảnh-2">
-            </div>
-            <div class="carousel-item">
-                <img src="https://bizweb.dktcdn.net/100/436/596/themes/980306/assets/slider_3.jpg?1768998303308"
-                    class="d-block w-100" alt="ảnh-3">
-            </div>
-            <div class="carousel-item">
-                <img src="https://bizweb.dktcdn.net/100/436/596/themes/980306/assets/slider_2.jpg?1768998303308"
-                    class="d-block w-100" alt="ảnh-4">
-            </div>
+            <?php endforeach; ?>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
             data-bs-slide="prev">

@@ -3,7 +3,6 @@ include __DIR__ . "/../layouts/header.php";
 ?>
 <main>
     <div class="container-fluid p-0">
-        <!-- Hero banner -->
         <div class="bg-primary text-white text-center py-5">
             <div class="container">
                 <h1 class="display-4 fw-bold mb-3">Liên hệ với chúng tôi</h1>
@@ -13,14 +12,12 @@ include __DIR__ . "/../layouts/header.php";
 
         <div class="container py-5">
             <div class="row g-0 align-items-start shadow rounded-4 overflow-hidden">
-                <!-- Cột trái: Thông tin liên hệ + ảnh -->
                 <div class="col-lg-5 bg-light">
                     <div class="p-4 p-md-5 h-100">
                         <h3 class="mb-4">🎯 Kết nối với chúng tôi</h3>
                         <p class="text-muted mb-4">Bạn có câu hỏi, góp ý hoặc cần hỗ trợ? Hãy để lại thông tin, đội ngũ
                             của chúng tôi sẽ liên hệ lại trong thời gian sớm nhất.</p>
 
-                        <!-- Ảnh minh họa -->
                         <div class="mb-4">
                             <img src="https://images.unsplash.com/photo-1423666639041-f56000c27a7a?w=600&h=400&fit=crop"
                                 alt="Liên hệ" class="img-fluid rounded-3 shadow-sm w-100"
@@ -75,7 +72,6 @@ include __DIR__ . "/../layouts/header.php";
                     </div>
                 </div>
 
-                <!-- Cột phải: Form liên hệ -->
                 <div class="col-lg-7 bg-white p-4 p-md-5">
                     <h3 class="mb-4">📝 Gửi tin nhắn</h3>
 
@@ -152,4 +148,5 @@ include __DIR__ . "/../layouts/header.php";
         </div>
     </div>
 </main>
+
 <?php include __DIR__ . "/../layouts/footer.php"; ?>

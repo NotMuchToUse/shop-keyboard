@@ -49,6 +49,8 @@ $filterParam = !empty($filterStr) ? '&filter=' . urlencode($filterStr) : '';
 
 <main class="py-4">
     <section class="container">
+
+        <!-- Thanh search -->
         <div class="d-flex justify-content-between align-self-center flex-wrap gap-3">
             <div class="d-flex flex-column">
                 <label for="searchInput" class="fw-bold mb-1">Tìm sản phẩm:</label>
@@ -61,6 +63,7 @@ $filterParam = !empty($filterStr) ? '&filter=' . urlencode($filterStr) : '';
                 </div>
             </div>
 
+            <!-- Thanh sort với filter -->
             <div class="d-flex justify-content-between align-self-center gap-3">
                 <div class="d-flex flex-column">
                     <label for="sortSelect" class="fw-bold mb-1">Sắp xếp:</label>
@@ -74,7 +77,6 @@ $filterParam = !empty($filterStr) ? '&filter=' . urlencode($filterStr) : '';
                 </div>
                 <div class="d-flex flex-column mb-3">
                     <span class="fw-bold mb-1">Bộ lọc: </span>
-                    <!-- Nút mở Offcanvas (Sheet Filter) -->
                     <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#filterOffcanvas" aria-controls="filterOffcanvas">
                         <i class="fa-solid fa-filter"></i> Lọc
@@ -85,69 +87,72 @@ $filterParam = !empty($filterStr) ? '&filter=' . urlencode($filterStr) : '';
 
         <hr class="border border-secondary border-3 opacity-25">
 
+        <!-- Thông tin số lượng sản phẩm -->
         <div class="mb-4">
             <span class="fw-bold">Hiển thị <?php echo count($currentProducts); ?> / <?php echo $totalProducts; ?> sản
                 phẩm</span>
             <?php if (!empty($keyword) || !empty($filters)): ?>
-            (Đang áp dụng bộ lọc)
+                (Đang áp dụng bộ lọc)
             <?php endif; ?>
         </div>
 
+        <!-- Danh sách sản phẩm -->
         <div class="row g-4">
             <?php if (count($currentProducts) > 0): ?>
-            <?php foreach ($currentProducts as $item): ?>
-            <div class="col-md-3">
-                <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden">
-                    <img src="<?php echo $item['image']; ?>" class="card-img-top" alt="<?php echo $item['name']; ?>"
-                        style="height: 200px; object-fit: cover;">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title fw-bold text-truncate" title="<?php echo $item['name']; ?>">
-                            <?php echo $item['name']; ?></h5>
-                        <p class="card-text text-muted small flex-grow-1"><?php echo $item['desc']; ?></p>
-                        <div class="d-flex justify-content-between align-items-center mt-3">
-                            <span class="text-primary fw-bold fs-5"><?php echo $item['price']; ?></span>
-                            <button class="btn btn-outline-primary rounded-pill px-3">Mua</button>
+                <?php foreach ($currentProducts as $item): ?>
+                    <div class="col-md-3">
+                        <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden">
+                            <img src="<?php echo $item['image']; ?>" class="card-img-top" alt="<?php echo $item['name']; ?>"
+                                style="height: 200px; object-fit: cover;">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title fw-bold text-truncate" title="<?php echo $item['name']; ?>">
+                                    <?php echo $item['name']; ?></h5>
+                                <p class="card-text text-muted small flex-grow-1"><?php echo $item['desc']; ?></p>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <span class="text-primary fw-bold fs-5"><?php echo $item['price']; ?></span>
+                                    <button class="btn btn-outline-primary rounded-pill px-3">Mua</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
             <?php else: ?>
-            <div class="col-12 text-center py-5">
-                <h3 class="text-muted">Không tìm thấy sản phẩm nào phù hợp!</h3>
-            </div>
+                <div class="col-12 text-center py-5">
+                    <h3 class="text-muted">Không tìm thấy sản phẩm nào phù hợp!</h3>
+                </div>
             <?php endif; ?>
         </div>
 
+        <!-- Phân trang -->
         <?php if ($totalPages > 1): ?>
-        <nav class="mt-5">
-            <ul class="pagination justify-content-center">
-                <li class="page-item <?php echo ($p <= 1) ? 'disabled' : ''; ?>">
-                    <a class="page-link"
-                        href="?page=product&sort=<?php echo urlencode($sort); ?>&keyword=<?php echo urlencode($keyword); ?><?php echo $filterParam; ?>&p=<?php echo $p - 1; ?>">Trước</a>
-                </li>
+            <nav class="mt-5">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item <?php echo ($p <= 1) ? 'disabled' : ''; ?>">
+                        <a class="page-link"
+                            href="?page=product&sort=<?php echo urlencode($sort); ?>&keyword=<?php echo urlencode($keyword); ?><?php echo $filterParam; ?>&p=<?php echo $p - 1; ?>">Trước</a>
+                    </li>
 
-                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                <li class="page-item <?php echo ($i == $p ? 'active' : ''); ?>">
-                    <a class="page-link"
-                        href="?page=product&sort=<?php echo urlencode($sort); ?>&keyword=<?php echo urlencode($keyword); ?><?php echo $filterParam; ?>&p=<?php echo $i; ?>">
-                        <?php echo $i; ?>
-                    </a>
-                </li>
-                <?php endfor; ?>
+                    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                        <li class="page-item <?php echo ($i == $p ? 'active' : ''); ?>">
+                            <a class="page-link"
+                                href="?page=product&sort=<?php echo urlencode($sort); ?>&keyword=<?php echo urlencode($keyword); ?><?php echo $filterParam; ?>&p=<?php echo $i; ?>">
+                                <?php echo $i; ?>
+                            </a>
+                        </li>
+                    <?php endfor; ?>
 
-                <li class="page-item <?php echo ($p >= $totalPages) ? 'disabled' : ''; ?>">
-                    <a class="page-link"
-                        href="?page=product&sort=<?php echo urlencode($sort); ?>&keyword=<?php echo urlencode($keyword); ?><?php echo $filterParam; ?>&p=<?php echo $p + 1; ?>">Sau</a>
-                </li>
-            </ul>
-        </nav>
+                    <li class="page-item <?php echo ($p >= $totalPages) ? 'disabled' : ''; ?>">
+                        <a class="page-link"
+                            href="?page=product&sort=<?php echo urlencode($sort); ?>&keyword=<?php echo urlencode($keyword); ?><?php echo $filterParam; ?>&p=<?php echo $p + 1; ?>">Sau</a>
+                    </li>
+                </ul>
+            </nav>
         <?php endif; ?>
 
     </section>
 </main>
 
-<!-- KHU VỰC OFFCANVAS (SHEET LỌC SẢN PHẨM) -->
+<!-- Sheet filter -->
 <div class="offcanvas offcanvas-end" tabindex="-1" id="filterOffcanvas" aria-labelledby="filterOffcanvasLabel">
     <div class="offcanvas-header border-bottom">
         <h5 class="offcanvas-title fw-bold" id="filterOffcanvasLabel">Lọc Sản Phẩm</h5>
@@ -155,7 +160,7 @@ $filterParam = !empty($filterStr) ? '&filter=' . urlencode($filterStr) : '';
     </div>
     <div class="offcanvas-body">
 
-        <!-- Nhóm: Nhu cầu -->
+        <!-- Nhu cầu -->
         <h6 class="fw-bold mb-3">Nhu cầu</h6>
         <div class="form-check mb-2">
             <input class="form-check-input filter-checkbox" type="checkbox" value="Gaming" id="filterGaming"
@@ -168,7 +173,7 @@ $filterParam = !empty($filterStr) ? '&filter=' . urlencode($filterStr) : '';
             <label class="form-check-label" for="filterOffice">Phím Văn phòng</label>
         </div>
 
-        <!-- Nhóm: Loại Switch -->
+        <!-- Loại Switch -->
         <h6 class="fw-bold mb-3 mt-4">Loại Switch</h6>
         <div class="form-check mb-2">
             <input class="form-check-input filter-checkbox" type="checkbox" value="Linear" id="filterLinear"
@@ -181,7 +186,7 @@ $filterParam = !empty($filterStr) ? '&filter=' . urlencode($filterStr) : '';
             <label class="form-check-label" for="filterTactile">Switch Tactile (Có khấc)</label>
         </div>
 
-        <!-- Nhóm: Màu sắc -->
+        <!-- Màu sắc -->
         <h6 class="fw-bold mb-3 mt-4">Màu sắc phím</h6>
         <div class="form-check mb-2">
             <input class="form-check-input filter-checkbox" type="checkbox" value="Pink" id="filterPink"
@@ -203,8 +208,9 @@ $filterParam = !empty($filterStr) ? '&filter=' . urlencode($filterStr) : '';
 
     <!-- Nút Áp dụng gắn ở đáy Sheet -->
     <div class="offcanvas-footer p-3 border-top">
-        <button class="btn btn-primary w-100 fw-bold py-2" type="button" onclick="applyFilters()">Áp dụng bộ
-            lọc</button>
+        <button class="btn btn-primary w-100 fw-bold py-2" type="button" onclick="applyFilters()">
+            Áp dụng bộ lọc
+        </button>
     </div>
 </div>
 
